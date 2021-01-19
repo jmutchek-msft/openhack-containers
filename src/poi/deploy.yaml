@@ -6,15 +6,15 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app: nginx
+      app: poi
   template:
     metadata:
       labels:
-        app: nginx
+        app: poi
     spec:
       containers:
       - name: poi
-        image: imageid registrykna5332.azurecr.io/tripinsights/poi:v1.0
+        image: registrykna5332.azurecr.io/tripinsights/poi:v1.0
         ports:
         - containerPort: 80
         resources:
