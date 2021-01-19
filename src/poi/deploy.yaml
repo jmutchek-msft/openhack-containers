@@ -17,6 +17,15 @@ spec:
         image: registrykna5332.azurecr.io/tripinsights/poi:v1.0
         ports:
         - containerPort: 80
+        env:
+        - name: SQL_USER
+          value: ""
+        - name: SQL_PASSWORD
+          value: ""
+        - name: SQL_SERVER
+          value: ""
+        - name: SQL_DBNAME
+          value: ""
         resources:
           requests:
             cpu: 250m
