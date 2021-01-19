@@ -25,7 +25,7 @@ spec:
         - name: SQL_SERVER
           value: ""
         - name: SQL_DBNAME
-          value: ""
+          value: "mydrivingDB"
         resources:
           requests:
             cpu: 250m
