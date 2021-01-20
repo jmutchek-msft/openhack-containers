@@ -5,6 +5,8 @@ REGION=northeurope
 AKS_VERSION=1.9.16
 CLUSTER_NAME=team4-openhack
 
+az network vnet subnet create --resource-group $RG --vnet-name $VNET --name $SUBNET --address-prefixes 10.2.1.0/24
+
 SUBNET_ID=$(az network vnet subnet show \
   -g $RG --vnet-name $VNET --name $SUBNET --query id -o tsv)
 
