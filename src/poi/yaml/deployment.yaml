@@ -46,22 +46,22 @@ spec:
           - name: WEB_PORT
             valueFrom:
               configMapKeyRef:
-                name: POI_CONFIG
+                name: poi_config
                 key: WEB_PORT
           - name: WEB_SERVER_BASE_URI
             valueFrom:
               configMapKeyRef:
                 key: WEB_SERVER_BASE_URI
-                name: POI_CONFIG
+                name: poi_config
           - name: ASPNETCORE_ENVIRONMENT
             valueFrom:
               configMapKeyRef:
                 key: ASPNETCORE_ENVIRONMENT
-                name: POI_CONFIG
+                name: poi_config
           - name: CONFIG_FILES_PATH
             valueFrom:
               configMapKeyRef:
                 key: CONFIG_FILES_PATH
-                name: POI_CONFIG
+                name: poi_config
 
         
