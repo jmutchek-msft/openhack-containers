@@ -6,6 +6,6 @@ spec:
   selector:
     app: poi  #must match the labels in the deployment template
   ports:
-  - port: 8080
+  - port: 80
     targetPort: 80 #must match the container port of the Pod
   type: ClusterIP #Use ClusterIP
