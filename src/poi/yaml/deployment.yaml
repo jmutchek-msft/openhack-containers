@@ -1,1 +1,67 @@
-#poi service deployment manifest
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  app: poi
+spec:
+  selector:
+    matchLabels:
+      app: poi
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: poi
+    spec:
+      containers:
+      - name: poi
+        image: registrykna5332.azurecr.io/tripinsights/poi-az:v1.0
+        ports:
+        - containerPort: 80
+        env:
+          - name:  SQL_USER
+            valueFrom:
+              secretKeyRef:
+                name:  sql_secrets
+                key:  SQL_USER
+          - name: SQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: sql_secrets
+                key: SQL_PASSWORD
+          - name: SQL_SERVER
+            valueFrom:
+              secretKeyRef:
+                name: sql_secrets
+                key: SQL_SERVER
+          - name: SQL_DBNAME
+            valueFrom:
+              secretKeyRef:
+                name: sql_secrets
+                key: SQL_DBNAME
+          - name: WEB_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: POI_CONFIG
+                key: WEB_PORT
+          - name: WEB_SERVER_BASE_URI
+            valueFrom:
+              configMapKeyRef:
+                key: WEB_SERVER_BASE_URI
+                name: POI_CONFIG
+          - name: ASPNETCORE_ENVIRONMENT
+            valueFrom:
+              configMapKeyRef:
+                key: ASPNETCORE_ENVIRONMENT
+                name: POI_CONFIG
+          - name: CONFIG_FILES_PATH
+            valueFrom:
+              configMapKeyRef:
+                key: CONFIG_FILES_PATH
+                name: POI_CONFIG
+
+        
