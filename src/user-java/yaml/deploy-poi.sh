@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #create the namespace first
-namespace=tripviewer
+namespace=tripviewer-apis
 
 
 kubectl create --namespace="$namespace" -f configMap.yaml
