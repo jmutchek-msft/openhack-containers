@@ -1,0 +1,62 @@
+az login
+az account set --subscription "5763fde3-4253-480c-928f-dfe1e8888a57"
+
+AKS_VERSION=1.17.16
+CLUSTER_NAME=aksprivatecluster
+VNET=hub
+SUBNET=aks-subnet
+RG=amltemplate
+REGION=eastus
+ACR=amltemplateacr
+
+az aks get-credentials --resource-group $RG --name $CLUSTER_NAME 
+
+SUBNET_ID=$(az network vnet subnet show \
+  -g $RG --vnet-name $VNET --name $SUBNET --query id -o tsv)
+echo $SUBNET_ID
+
+
+az aks create \
+--resource-group $RG \
+--name $CLUSTER_NAME \
+--load-balancer-sku standard \
+--enable-private-cluster \
+--location $REGION \
+--kubernetes-version $AKS_VERSION \
+--network-plugin azure \
+--vnet-subnet-id $SUBNET_ID \
+--service-cidr 10.240.0.0/24 \
+--dns-service-ip 10.240.0.10 \
+--docker-bridge-address 172.17.0.1/16 \
+--generate-ssh-keys
+
+
+az aks update -n $CLUSTER_NAME -g $RG --attach-acr $ACR
+
+az aks show --name $CLUSTER_NAME --resource-group $RG --query servicePrincipalProfile.clientId -o tsv
+SPN_ID=$(az aks show -n $CLUSTER_NAME -g $RG --query servicePrincipalProfile.clientId -o tsv)
+echo $SPN_ID
+az group show -n $RG --query id -o tsv
+
+az role assignment create --assignee cc818dbe-b892-440e-b9e4-f3555dd5a67c --role 'Network Contributor' --scope /subscriptions/<your subscription id>/resourceGroups/ws1103
+az role assignment create --assignee <appId>  --role Contributor --scope <resourceScope>
+====================
+az aks create -g $rg -n ws1103privateaks --load-balancer-sku standard --enable-private-cluster --network-plugin azure 
+-vnet-subnet-id /subscriptions/<your subscription id>/resourceGroups/ws1103/providers/Microsoft.Network/virtualNetworks/hub/subnets/scoring 
+--docker-bridge-address 172.17.0.1/16 --dns-service-ip 10.2.0.10 --service-cidr 10.2.0.0/24
+
+az aks create \
+--node-count 2 \
+--vm-set-type VirtualMachineScaleSets \
+--load-balancer-sku standard \
+--location $REGION \
+--kubernetes-version $AKS_VERSION \
+--network-plugin azure \
+--vnet-subnet-id $SUBNET_ID \
+--service-cidr 10.240.0.0/24 \
+--dns-service-ip 10.240.0.10 \
+--docker-bridge-address 172.17.0.1/16 \
+--generate-ssh-keys
+
+
+
