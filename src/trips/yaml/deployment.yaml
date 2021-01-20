@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trips-deployment
+spec:
+  selector:
+    matchLabels:
+      app: trips
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: trips
+    spec:
+      containers:
+      - name: trips
+        image: registrykna5332.azurecr.io/tripinsights/trips:v1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+          - name:  SQL_USER
+            valueFrom:
+              secretKeyRef:
+                name:  sql-secrets
+                key:  SQL_USER
+          - name: SQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: sql-secrets
+                key: SQL_PASSWORD
+          - name: SQL_SERVER
+            valueFrom:
+              configMapKeyRef:
+                name: trips-config
+                key: SQL_SERVER
+          - name: SQL_DBNAME
+            valueFrom:
+              configMapKeyRef:
+                name: trips-config
+                key: SQL_DBNAME
+          - name: OPENAPI_DOCS_URI
+            valueFrom:
+              configMapKeyRef:
+                name: trips-config
+                key: OPENAPI_DOCS_URI
+          - name: DEBUG_LOGGING
+            valueFrom:
+              configMapKeyRef:
+                key: DEBUG_LOGGING
+                name: trips-config
+          - name: CONFIG_FILES_PATH
+            valueFrom:
+              configMapKeyRef:
+                key: CONFIG_FILES_PATH
+                name: trips-config
+
+        
