@@ -8,3 +8,4 @@ data:
   CONFIG_FILES_PATH: "/secrets"
   SQL_SERVER: "sqlserverkna5332.database.windows.net"
   SQL_DBNAME: "mydrivingDB"
+  WEB_SERVER_BASE_URI: "http://0.0.0.0"
