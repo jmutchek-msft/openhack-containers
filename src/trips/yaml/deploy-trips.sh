@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #create the namespace first
-namespace=tripviewer
+namespace=tripviewer-apis
 
 #create generic secret from file
 #kubectl create secret generic sql-secrets --namespace="$namespace" \
