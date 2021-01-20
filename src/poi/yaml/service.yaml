@@ -8,4 +8,4 @@ spec:
   ports:
   - port: 8080
     targetPort: 80 #must match the container port of the Pod
-  type: LoadBalancer
+  type: ClusterIP #Use ClusterIP
