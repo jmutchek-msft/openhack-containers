@@ -15,7 +15,7 @@ az aks create \
 --name $CLUSTER_NAME \
 --enable-aad \
 --aad-admin-group-object-ids da45e6e8-2398-4508-a940-e3cfa4a171de \
---aad-tenant-id 7a74343b-eb48-4f2d-984c-65b4f8f1566d
+--aad-tenant-id 7a74343b-eb48-4f2d-984c-65b4f8f1566d \
 --node-count 2 \
 --vm-set-type VirtualMachineScaleSets \
 --load-balancer-sku standard \
@@ -23,7 +23,7 @@ az aks create \
 --kubernetes-version $AKS_VERSION \
 --network-plugin azure \
 --vnet-subnet-id $SUBNET_ID \
---service-cider 10.240.0.0/24 \
+--service-cidr 10.240.0.0/24 \
 --dns-service-ip 10.240.0.10 \
 --docker-bridge-address 172.17.0.1/16 \
 --generate-ssh-keys
