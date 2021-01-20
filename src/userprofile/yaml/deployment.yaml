@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userprofile
+spec:
+  selector:
+    matchLabels:
+      app: userprofile
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: userprofile
+    spec:
+      containers:
+      - name: userprofile
+        image: registrykna5332.azurecr.io/tripinsights/userprofile:v1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+          - name:  SQL_USER
+            valueFrom:
+              secretKeyRef:
+                name:  sql-secrets
+                key:  SQL_USER
+          - name: SQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: sql-secrets
+                key: SQL_PASSWORD
+          - name: SQL_SERVER
+            valueFrom:
+              configMapKeyRef:
+                name: userprofile-config
+                key: SQL_SERVER
+          - name: SQL_DBNAME
+            valueFrom:
+              configMapKeyRef:
+                name: userprofile-config
+                key: SQL_DBNAME
+          - name: CONFIG_FILES_PATH
+            valueFrom:
+              configMapKeyRef:
+                key: CONFIG_FILES_PATH
+                name: userprofile-config
+
+        
