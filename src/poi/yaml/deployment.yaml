@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  app: poi
+  name: poi-deployment
 spec:
   selector:
     matchLabels:
@@ -36,12 +36,12 @@ spec:
                 key: SQL_PASSWORD
           - name: SQL_SERVER
             valueFrom:
-              secretKeyRef:
+              configMapKeyRef:
                 name: poi-config
                 key: SQL_SERVER
           - name: SQL_DBNAME
             valueFrom:
-              secretKeyRef:
+              configMapKeyRef:
                 name: poi-config
                 key: SQL_DBNAME
           - name: WEB_PORT
