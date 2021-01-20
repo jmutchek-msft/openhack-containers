@@ -27,42 +27,42 @@ spec:
           - name:  SQL_USER
             valueFrom:
               secretKeyRef:
-                name:  sql_secrets
+                name:  sql-secrets
                 key:  SQL_USER
           - name: SQL_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: sql_secrets
+                name: sql-secrets
                 key: SQL_PASSWORD
           - name: SQL_SERVER
             valueFrom:
               secretKeyRef:
-                name: sql_secrets
+                name: poi-config
                 key: SQL_SERVER
           - name: SQL_DBNAME
             valueFrom:
               secretKeyRef:
-                name: sql_secrets
+                name: poi-config
                 key: SQL_DBNAME
           - name: WEB_PORT
             valueFrom:
               configMapKeyRef:
-                name: poi_config
+                name: poi-config
                 key: WEB_PORT
           - name: WEB_SERVER_BASE_URI
             valueFrom:
               configMapKeyRef:
                 key: WEB_SERVER_BASE_URI
-                name: poi_config
+                name: poi-config
           - name: ASPNETCORE_ENVIRONMENT
             valueFrom:
               configMapKeyRef:
                 key: ASPNETCORE_ENVIRONMENT
-                name: poi_config
+                name: poi-config
           - name: CONFIG_FILES_PATH
             valueFrom:
               configMapKeyRef:
                 key: CONFIG_FILES_PATH
-                name: poi_config
+                name: poi-config
 
         
