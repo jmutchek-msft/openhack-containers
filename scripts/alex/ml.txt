@@ -9,7 +9,10 @@ RG=amltemplate
 REGION=eastus
 ACR=amltemplateacr
 
+az aks update --resource-group $RG --name $CLUSTER_NAME  --attach-acr $ACR
+
 az aks get-credentials --resource-group $RG --name $CLUSTER_NAME 
+
 
 SUBNET_ID=$(az network vnet subnet show \
   -g $RG --vnet-name $VNET --name $SUBNET --query id -o tsv)
