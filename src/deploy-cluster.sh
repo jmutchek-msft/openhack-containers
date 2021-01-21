@@ -24,3 +24,6 @@ az aks create \
 --dns-service-ip 10.240.0.10 \
 --docker-bridge-address 172.17.0.1/16 \
 --generate-ssh-keys
+
+#attach the ACR to the cluster so the cluster can pull images from our repo
+az aks update --name team4-openhack --attach-acr registrykna5332 -g teamResources

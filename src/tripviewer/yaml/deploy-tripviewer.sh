@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #create the namespace first
-namespace=tripviewer
+namespace=jungho-web
 
 kubectl create --namespace="$namespace" -f configMap.yaml
 kubectl create --namespace="$namespace" -f deployment.yaml
