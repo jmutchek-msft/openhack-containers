@@ -5,7 +5,7 @@ metadata:
   namespace: tripviewer-apis
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
+  kind: ClusterRole
   name: view
 subjects:
 - kind: Group
@@ -19,7 +19,7 @@ metadata:
   namespace: tripviewer
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
+  kind: ClusterRole
   name: edit
 subjects:
 - kind: Group
