@@ -4,7 +4,7 @@ metadata:
   name: poi-config
 data:
   WEB_PORT: "80"
-  ASPNETCORE_ENVIRONMENT: "Local"
+  ASPNETCORE_ENVIRONMENT: "Production"
   CONFIG_FILES_PATH: "/secrets"
   SQL_SERVER: "sqlserverkna5332.database.windows.net"
   SQL_DBNAME: "mydrivingDB"
