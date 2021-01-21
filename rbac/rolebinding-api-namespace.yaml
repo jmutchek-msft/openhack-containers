@@ -1,0 +1,27 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: api-edit-access
+  namespace: tripviewer-apis
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: edit
+subjects:
+- kind: Group
+  namespace: tripviewer-apis
+  name: a401dbcb-da5d-4db4-be77-f6beeb0218e0
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: web-view-access
+  namespace: tripviewer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: view
+subjects:
+- kind: Group
+  namespace: tripviewer
+  name: a401dbcb-da5d-4db4-be77-f6beeb0218e0
