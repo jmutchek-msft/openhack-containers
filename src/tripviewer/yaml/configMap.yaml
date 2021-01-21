@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: tripviewer-config
 data:
-  TRIPS_API_ENDPOINT: http://trips.tripviewer-apis #must include the namespace
-  USERPROFILE_API_ENDPOINT: http://userprofile.tripviewer-apis #must include the namespace
+  TRIPS_API_ENDPOINT: http://trips.jungho-apis #must include the namespace
+  USERPROFILE_API_ENDPOINT: http://userprofile.jungho-apis #must include the namespace
