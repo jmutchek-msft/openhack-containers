@@ -1,0 +1,27 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: web-dev-access
+  namespace: tripviewer
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: webdev-full-access
+subjects:
+- kind: Group
+  namespace: tripviewer
+  name: b5ca8fd0-677d-4bc9-9d66-8beeed6d6c9e
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: api-dev-access
+  namespace: tripviewer-apis
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: apidev-full-access
+subjects:
+- kind: Group
+  namespace: tripviewer-apis
+  name: b94b3ff0-6a1e-4cad-9c33-76a537b8c9f8
