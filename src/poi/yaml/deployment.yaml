@@ -28,16 +28,6 @@ spec:
         ports:
         - containerPort: 80
         env:
-          - name: SQL_SERVER
-            valueFrom:
-              configMapKeyRef:
-                name: poi-config
-                key: SQL_SERVER
-          - name: SQL_DBNAME
-            valueFrom:
-              configMapKeyRef:
-                name: poi-config
-                key: SQL_DBNAME
           - name: WEB_PORT
             valueFrom:
               configMapKeyRef:

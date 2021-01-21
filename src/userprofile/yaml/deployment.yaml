@@ -21,33 +21,26 @@ spec:
       - name: userprofile
         image: registrykna5332.azurecr.io/tripinsights/userprofile:v1.0
         imagePullPolicy: Always
+        volumeMounts:
+          - name: secrets-kv
+            mountPath: "/secrets"
+            readOnly: true
         ports:
         - containerPort: 80
         env:
-          - name:  SQL_USER
-            valueFrom:
-              secretKeyRef:
-                name:  sql-secrets
-                key:  SQL_USER
-          - name: SQL_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: sql-secrets
-                key: SQL_PASSWORD
-          - name: SQL_SERVER
-            valueFrom:
-              configMapKeyRef:
-                name: userprofile-config
-                key: SQL_SERVER
-          - name: SQL_DBNAME
-            valueFrom:
-              configMapKeyRef:
-                name: userprofile-config
-                key: SQL_DBNAME
           - name: CONFIG_FILES_PATH
             valueFrom:
               configMapKeyRef:
                 key: CONFIG_FILES_PATH
                 name: userprofile-config
+      volumes:
+        - name: secrets-kv
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: azure-kvname
+            nodePublishSecretRef:
+              name: secrets-store-creds
 
         
